@@ -31,6 +31,12 @@ class Data:
     def getValue():
         return self.value
 
+    def getType():
+        return self.type
+
+    def getIdCountry():
+        return self.id_country
+
     def setName(self, newname):
         self.name = newname
 
@@ -42,3 +48,9 @@ class Data:
 
     def setValue(self, newvalue):
         self.value = newvalue
+    
+    def setType(self,newtype)
+        self.value = newtype
+    
+    def setIdCountry(self,newIdCountry)
+        self.id_country = newIdCountry
