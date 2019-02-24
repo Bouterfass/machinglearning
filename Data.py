@@ -1,14 +1,20 @@
 class Data:
-    """Class which define a Data by :
+    """Class which define a data by :
     - his name
+    - his type
+    - his id_country
     - his year
-    - his unit
-    - her value """
-    def __init__(self, name = "", year = "", unit = "", value = ""):
-        self.name = name
-        self.year = year
-        self.unit = unit
-        self.value = value
+    - his unite
+    - her value"""
+
+    def __init__(self,name,type,id_country,year,unite,value):
+        """This is the constructor who initializes the attributes"""
+        self.name=name
+        self.type=type
+        self.id_country
+        self.year=year
+        self.unite=unite
+        self.value=value
 
     def printData(self):
         print("This is what is stored in your data: "+ self.name +" " + self.year +" "+ self.unit +" "+ self.value)
