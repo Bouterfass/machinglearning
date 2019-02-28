@@ -2,7 +2,7 @@ import csv
 from Data import Data
 
 class DataTreatment:
-    def fromCSVtoDATA(f, pays):
+    def fromCSVtoDATA(f, state, dataname):
         ################# LECTURE #######################
         with open(f,'r') as file: #j'ouvre un csv en tant que file
             fieldnames = ['id','pays','Annee','critere','valeur','balec','balec2']
@@ -20,13 +20,13 @@ class DataTreatment:
                 for line in reader: # je lis les données de population.csv
                     del line['balec'] #j'efface les deux dernières colonnes qui ne sont que des informations inutiles
                     del line['balec2']
-                    if line['critere'] == 'Population mid-year estimates (millions)': #j'écris que les données concernant l'Afrique en 2015
-                        if line['pays'] == pays:
+                    if line['critere'] == dataname: #'Population mid-year estimates (millions)'
+                        if line['pays'] == state:
                             del line['critere']
                             del line['id']
                             writer.writerow(line)
                             line_number = line_number + 1
-            print(line_number)
+        #    print(line_number)
         newfile.close()
         file.close()
 
@@ -55,9 +55,3 @@ class DataTreatment:
                         j = j + 1
                         i = 1
         return datalist
-    #for data in datalist:
-    #    data.printData()
-
-
-for data in DataTreatment.fromCSVtoDATA('population.csv','France'):
-    data.printData()
