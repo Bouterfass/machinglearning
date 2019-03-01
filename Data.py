@@ -7,7 +7,7 @@ class Data:
 <<<<<<< HEAD
     - his unit
     - her value """
-    def __init__(self, state= "", id_state = "", type = "", name = "", year = "", unit = "", value = ""):
+    def __init__(self, state= "", id_state = "", type = "", name = "", year = "", unit = "", value = "", normalize=None):
         self.name = name
         self.year = year
         self.unit = unit
@@ -15,6 +15,7 @@ class Data:
         self.type = type
         self.id_state = id_state
         self.state = state
+        self.normalize = normalize
 
     def printData(self):
         print("This is what is stored in your data: "+ str(self.state) +" " + str(self.year) +"  "+ str(self.value))

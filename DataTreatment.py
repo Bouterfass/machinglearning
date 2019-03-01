@@ -1,5 +1,6 @@
 import csv
 from Data import Data
+from copy import deepcopy
 
 class DataTreatment:
     def fromCSVtoDATA(f, state, dataname):
@@ -55,3 +56,72 @@ class DataTreatment:
                         j = j + 1
                         i = 1
         return datalist
+    
+    def NormalizeData(ListData):
+        """Fonction qui normalise une liste de données"""   
+        #a = acces a la bdd (on arriva pas a la faire du coup jai fais sans)
+        a = ListData[0].normalize
+
+        def one():
+            """code de la premiere normalisation"""
+            #Ici depense de santee, rien a faire
+            return ListData
+    
+        def two():
+            """code de la deuxieme normalisation"""
+            #Ici indice de prod
+
+            #Je declare un tableau de float qui va contenir les valeurs normalisee
+            valuenormalize = [float]*len(ListData)
+            #je remplis le tableau avec les donnees normalisee
+            for i in range (1,len(ListData)):
+                valueiteration = ListData[i].value
+                b = ListData[i-1].value
+                valuenormalize[i-1]=(float(valueiteration)-float(b))/float(b)
+
+            #Je duplique la liste car je ne dois pas toucher à loriginal sinon cela affecte la suite du code
+            ListData2=deepcopy(ListData)
+
+            #je remplace les donnees bruts par les donnees normalisees dans le tableau precedent
+            for i in range (len(ListData)):
+                ListData2[i].value=valuenormalize[i]
+
+            #jefface la derniere case du tableau qui contient un float sans valeur
+            ListData2.pop(-1)
+            
+            #je retourne la liste modifie
+            return ListData2
+    
+        def three():
+            """code de la troisieme normalisation"""
+            #Ici pib
+
+            #Je declare un tableau de float qui va contenir les valeurs normalisee et un float qui contient la valeur de la premiere data
+            valuenormalize = [float]*len(ListData)
+            firstvalue = ListData[0].value
+            #Je remplis le tableau avec les donnees normalisees
+            for i in range(1,len(ListData)):
+                a = ListData[i].value
+                valuenormalize[i-1] = ((float(a)-float(firstvalue))/float(firstvalue))
+            
+            #Je duplique la liste car je ne dois pas toucher à loriginal sinon cela affecte la suite du code
+            ListData3 = deepcopy(ListData)
+
+            #je remplace les donnees bruts par les donnees normalisees dans le tableau precedent
+            for i in range (len(ListData)):
+                ListData3[i].value=valuenormalize[i]
+            #jefface la derniere case du tableau qui contient un float sans valeur
+            ListData3.pop(-1)
+            
+            #je retourne la liste modifie
+            return ListData3
+
+        #Verifie quelle fonction de normalisation utiliser
+        switcher = {
+            1: one(),
+            2: two(),
+            3: three()
+        }
+
+        #je retourne le resultat de la fonction appelee par le switcher
+        return switcher.get(a)
